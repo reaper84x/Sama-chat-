@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Room</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to your CSS file -->
+<style type="text/css" id="dcoder_stylesheet">body {
+    font-family: Arial, sans-serif; /* Font for the entire body */
+    background-color: #e9eff1; /* Light background color */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Center vertically */
+}
+
+.chat-container {
+    width: 90%; /* Responsive width for mobile */
+    max-width: 400px; /* Maximum width for larger screens */
+    height: 80vh; /* Responsive height */
+    background-color: #ffffff; /* White background for the chat container */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Softer shadow effect */
+    display: flex;
+    flex-direction: column; /* Column layout */
+}
+
+.chat-header {
+    display: flex;
+    justify-content: space-between; /* Space between title and leave button */
+    align-items: center; /* Center items vertically */
+    padding: 10px; /* Reduced padding for header */
+    background-color: #0084ff; /* Messenger blue */
+    color: #ffffff; /* White text */
+    border-top-left-radius: 10px; /* Rounded corners */
+    border-top-right-radius: 10px; /* Rounded corners */
+}
+
+.chat-title {
+    font-size: 14px; /* Medium font size for title */
+    margin: 0; /* Remove default margin */
+}
+
+.chat-display {
+    flex: 1; /* Take remaining space */
+    padding: 15px; /* Padding for chat display */
+    overflow-y: auto; /* Enable vertical scrolling */
+    background-color: #f7f7f8; /* Light gray background for chat display */
+    border-bottom: 1px solid #e5e5e5; /* Light border at the bottom */
+}
+
+.chat-input-container {
+    display: flex; /* Flex layout for input fields and button */
+    padding: 10px; /* Padding for input container */
+    background-color: #ffffff; /* White background */
+    border-bottom-left-radius: 10px; /* Rounded corners */
+    border-bottom-right-radius: 10px; /* Rounded corners */
+}
+
+.chat-input {
+    flex: 1; /* Allow input fields to take available space */
+    padding: 10px; /* Padding for input */
+    border: 1px solid #e5e5e5; /* Light border */
+    border-radius: 5px; /* Rounded corners */
+    margin-right: 5px; /* Space between input fields */
+    background-color: #e9eff1; /* Soft light grayish blue */
+    color: #000000; /* Dark text color for readability */
+    font-size: 16px; /* Font size for mobile */
+}
+
+.button {
+    padding: 10px 15px; /* Button padding */
+    font-size: 16px; /* Font size for buttons */
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Rounded corners */
+    background-color: #0084ff; /* Messenger blue */
+    color: #ffffff; /* Button text color */
+    cursor: pointer; /* Change cursor on hover */
+    transition: background-color 0.3s, transform 0.3s; /* Smooth transition */
+}
+
+.button:hover {
+    background-color: #006bbf; /* Darker blue on hover */
+    transform: scale(1.05); /* Slightly enlarge button on hover */
+}
+
+.button:active {
+    transform: scale(0.95); /* Slightly shrink button on click */
+}
+
+/* Chat bubble styles */
+.message {
+    margin: 10px 0; /* Margin between messages */
+    display: flex; /* Flex layout for bubbles */
+    flex-direction: column; /* Column layout for username and bubble */
+}
+
+.message.username1 {
+    justify-content: flex-start; /* Align left for username1 */
+}
+
+.message.username2 {
+    justify-content: flex-end; /* Align right for username2 */
+}
+
+.chat-bubble {
+    max-width: 70%; /* Maximum width of bubbles */
+    padding: 10px 15px; /* Padding for bubbles */
+    border-radius: 15px; /* Rounded corners */
+    position: relative; /* Position for pseudo-elements */
+    animation: float 3s ease-in-out infinite; /* Floating animation */
+}
+
+.bubble-username1 {
+    background-color: #e1f5fe; /* Light blue for user1 */
+    color: #000000; /* Dark text color for contrast */
+}
+
+.bubble-username2 {
+    background-color: #cfd8dc; /* Light gray for user2 */
+    color: #000000; /* Dark text color for contrast */
+}
+
+.bubble-username {
+    font-size: 12px; /* Smallest size for username */
+    margin-bottom: 5px; /* Margin below username */
+}
+
+.bubble-time {
+    font-size: 10px; /* Very small font size for time */
+    position: absolute; /* Position relative to bubble */
+    bottom: -15px; /* Position below bubble */
+    right: 10px; /* Position to the right */
+    color: rgba(0, 0, 0, 0.7); /* Dark gray for time */
+}
+
+/* Floating animation */
+@keyframes float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+    100% { transform: translateY(0); }
+}
+
+/* Mobile-friendly styles */
+@media (max-width: 400px) {
+    .chat-input {
+        font-size: 14px; /* Adjust input font size for smaller screens */
+    }
+
+    .button {
+        font-size: 14px; /* Adjust button font size for smaller screens */
+    }
+
+    .chat-title {
+        font-size: 14px; /* Maintain title size for smaller screens */
+    }
+}</style></head>
+<body>
+    <div class="chat-container">
+        <header class="chat-header">
+            <h1 class="chat-title">Chat Room</h1>
+            <button class="button" id="leaveChatBtn">Leave Chat</button>
+        </header>
+        <div class="chat-display" id="chatDisplay">
+            <!-- Messages will be dynamically injected here -->
+        </div>
+        <div class="chat-input-container">
+            <input type="text" id="messageInput" class="chat-input" placeholder="Type your message here...">
+            <button class="button" id="sendMessageBtn">Send</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script> <!-- Link to your JavaScript file -->
+
+<script type="text/javascript" id="dcoder_script">// DOM Elements
+const chatDisplay = document.getElementById('chatDisplay');
+const messageInput = document.getElementById('messageInput');
+const sendMessageBtn = document.getElementById('sendMessageBtn');
+const leaveChatBtn = document.getElementById('leaveChatBtn');
+
+// Set default username
+const username = "RegisteredUser"; // Replace with dynamic username retrieval
+
+// Function to send a message
+function sendMessage() {
+    const message = messageInput.value.trim();
+
+    if (message) {
+        const timeStamp = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }); // Format time
+        const messageDiv = document.createElement('div');
+
+        // Assign classes for bubble appearance
+        const bubbleClass = username === "RegisteredUser" ? 'username1' : 'username2'; // Change logic as needed
+        messageDiv.className = `message ${bubbleClass}`;
+
+        messageDiv.innerHTML = `
+            <div class="chat-bubble bubble-${bubbleClass}">
+                <strong>${username}</strong>: ${message}
+                <span class="bubble-time">${timeStamp}</span>
+            </div>
+        `;
+
+        chatDisplay.appendChild(messageDiv); // Add message to chat display
+        messageInput.value = ''; // Clear input field
+        chatDisplay.scrollTop = chatDisplay.scrollHeight; // Scroll to bottom
+    } else {
+        alert("Please enter a message."); // Alert for empty fields
+    }
+}
+
+// Event listeners
+sendMessageBtn.addEventListener('click', sendMessage);
+messageInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+        sendMessage(); // Send message on Enter key
+    }
+});
+leaveChatBtn.addEventListener('click', () => {
+    window.location.href = 'index.html'; // Redirect to the main page
+});</script></body></html>

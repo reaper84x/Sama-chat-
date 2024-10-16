@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <title>Chat Room</title> 
+  <link rel="stylesheet" href="styles.css"> <!-- Link to your CSS file --> 
+ <style type="text/css" id="dcoder_stylesheet">body {
+    font-family: Arial, sans-serif; /* Font for the entire body */
+    background-color: #f0f0f0; /* Background color */
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Center vertically */
+}
+
+.container {
+    text-align: center; /* Center text in container */
+}
+
+h1 {
+    margin-bottom: 20px; /* Spacing below the heading */
+}
+
+.button {
+    padding: 15px 30px; /* Button padding for larger size */
+    font-size: 16px; /* Font size for buttons */
+    border: none; /* Remove default border */
+    border-radius: 8px; /* Rounded corners */
+    background-color: #007bff; /* Button background color */
+    color: white; /* Button text color */
+    cursor: pointer; /* Change cursor on hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow for button */
+    transition: background-color 0.3s, transform 0.3s; /* Smooth transition for background and scale */
+}
+
+.button:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+    transform: scale(1.05); /* Slightly enlarge button on hover */
+}
+
+.button:active {
+    transform: scale(0.95); /* Slightly shrink button on click */
+}</style></head> 
+ <body> 
+  <div class="container"> 
+   <h4>Welcome to the Chat Room</h4> <button class="button" id="createChatBtn">Create Chat</button> <button class="button" id="joinChatBtn">Join Chat</button> 
+  </div> 
+  <script src="script.js"></script> <!-- Link to your JavaScript file --> 
+ 
+<script type="text/javascript" id="dcoder_script">// Store valid chat codes
+let validCodes = [];
+
+// Function to create a chat
+function createChat() {
+    const chatCode = Math.random().toString(36).substr(2, 8); // Generate a random code
+    validCodes.push(chatCode); // Store the valid code
+    alert(`Chat room created! Your code is: ${chatCode}`);
+    
+    // Redirect to chat page (replace with actual chat page URL)
+    window.location.href = `chat.html?code=${chatCode}`; // Redirect to chat page
+}
+
+// Function to join a chat
+function joinChat() {
+    const code = prompt("Enter the chat code:"); // Prompt user for chat code
+    if (code) {
+        if (validCodes.includes(code)) {
+            // Valid code, redirect to chat page
+            window.location.href = `chat.html?code=${code}`; // Redirect to chat page
+        } else {
+            alert("Invalid chat code. Please try again."); // Invalid code alert
+        }
+    } else {
+        alert("No code entered."); // No code entered alert
+    }
+}
+
+// Event listeners for buttons
+document.getElementById('createChatBtn').addEventListener('click', createChat);
+document.getElementById('joinChatBtn').addEventListener('click', joinChat);</script></body></html>
